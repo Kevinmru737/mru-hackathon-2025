@@ -38,7 +38,3 @@ func update_animation(mov: Vector2):
 func _on_hurt_box_hurt(damage: Variant) -> void:
 	hp -= damage
 	print(hp)
-
-
-func _on_hurt_box_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.

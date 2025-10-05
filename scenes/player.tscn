@@ -169,7 +169,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
-size = Vector2(8, 13)
+size = Vector2(6, 10)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_g2els")
@@ -192,6 +192,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

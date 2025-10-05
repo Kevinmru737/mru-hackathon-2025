@@ -1,15 +1,126 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgk45n0w5wfs6"]
+[gd_scene load_steps=11 format=3 uid="uid://dgk45n0w5wfs6"]
 
 [ext_resource type="Script" uid="uid://blhyxmljh8w5i" path="res://scripts/enemy_potato.gd" id="1_i31rv"]
 [ext_resource type="Texture2D" uid="uid://b8ib4l601s2x0" path="res://art/BabyPotatoIdle1.png" id="1_ig50o"]
 [ext_resource type="PackedScene" uid="uid://4kgyluwu7pki" path="res://utility/hit_box.tscn" id="3_0f4ua"]
 [ext_resource type="PackedScene" uid="uid://diqvar8uw0u33" path="res://utility/hurt_box.tscn" id="4_4111o"]
+[ext_resource type="Texture2D" uid="uid://c5b68v0jhw2kx" path="res://art/baby_potato.png" id="5_4111o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rdnh3"]
 radius = 11.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kklhs"]
 radius = 14.0
+
+[sub_resource type="Animation" id="Animation_rdnh3"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_4111o")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_kklhs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ig50o")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_14c5d"]
+_data = {
+&"RESET": SubResource("Animation_kklhs"),
+&"idle": SubResource("Animation_rdnh3")
+}
 
 [node name="enemy_potato" type="CharacterBody2D"]
 script = ExtResource("1_i31rv")
@@ -30,6 +141,11 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_kklhs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_14c5d")
+}
 
 [connection signal="timeout" from="HitBox/DisableHitBoxTimer" to="HitBox" method="_on_disable_hit_box_timer_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

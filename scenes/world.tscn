@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cjhvwjx4vta6y" path="res://art/grasstile.png" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dndlv6w4kc4km" path="res://scenes/player.tscn" id="2_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://dgk45n0w5wfs6" path="res://scenes/enemy_potato.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://ccplwn8xi3kq2" path="res://utility/enemy_spawner.tscn" id="3_4wyf3"]
 
 [node name="world" type="Node2D"]
 
@@ -15,4 +15,4 @@ region_rect = Rect2(-1, -2.5, 1152, 648)
 
 [node name="player" parent="." instance=ExtResource("2_4wyf3")]
 
-[node name="enemy_potato" parent="." instance=ExtResource("5_71j4m")]
+[node name="EnemySpawner" parent="." instance=ExtResource("3_4wyf3")]

@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
-@export var movement_speed = 15
+@export var movement_speed = 25
 @export var hp = 10
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $Sprite2D
+@onready var anim = $AnimationPlayer
 
 var facing_left = false
+
+func _ready():
+	anim.play("idle")
 
 func _physics_process(_delta):
 	var direction = global_position.direction_to(player.global_position)

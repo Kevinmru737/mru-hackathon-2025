@@ -21,3 +21,4 @@ script = ExtResource("3_k0juu")
 texture = ExtResource("4_k0juu")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(5, 5)

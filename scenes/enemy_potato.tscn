@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgk45n0w5wfs6"]
+
+[ext_resource type="Script" uid="uid://blhyxmljh8w5i" path="res://scripts/enemy_potato.gd" id="1_i31rv"]
+[ext_resource type="Texture2D" uid="uid://b8ib4l601s2x0" path="res://art/BabyPotatoIdle1.png" id="1_ig50o"]
+
+[node name="enemy_potato" type="CharacterBody2D"]
+script = ExtResource("1_i31rv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ig50o")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dndlv6w4kc4km"]
+[gd_scene load_steps=10 format=3 uid="uid://dndlv6w4kc4km"]
 
 [ext_resource type="Script" uid="uid://dgxu7qgn5rgbo" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bs7wfqmqyq2el" path="res://art/knight/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://cpb8586p00om7" path="res://art/knight/Colour1/Outline/120x80_PNGSheets/_Run.png" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://diqvar8uw0u33" path="res://utility/hurt_box.tscn" id="4_dqkch"]
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 length = 0.001
@@ -167,10 +168,14 @@ _data = {
 &"run": SubResource("Animation_tuyoq")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(8, 13)
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["player"]]
+position = Vector2(4, -18)
 texture = ExtResource("2_g2els")
 hframes = 10
 
@@ -181,3 +186,15 @@ zoom = Vector2(3, 3)
 libraries = {
 &"": SubResource("AnimationLibrary_qlg0r")
 }
+
+[node name="HurtBox" parent="." instance=ExtResource("4_dqkch")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("RectangleShape2D_qlg0r")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="HurtBox/DisableTimer" to="HurtBox" method="_on_disable_timer_timeout"]
+
+[editable path="HurtBox"]

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var speed = 40
+var hp = 80
 @onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
 
@@ -23,6 +24,7 @@ func player_movement():
 	
 	velocity = mov.normalized() * speed
 	move_and_slide()
+
 	update_animation(mov)
 
 func update_animation(mov: Vector2):
@@ -32,3 +34,11 @@ func update_animation(mov: Vector2):
 	else:                   
 		if anim.current_animation != "idle":
 			anim.play("idle")
+
+func _on_hurt_box_hurt(damage: Variant) -> void:
+	hp -= damage
+	print(hp)
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
